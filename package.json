@@ -2,6 +2,10 @@
   "name": "manc",
   "description": "MANC — Contemporary Art Publication",
   "version": "1.0.0",
+  "author": {
+    "name": "MANC",
+    "email": "hello@manc.art"
+  },
   "engines": {
     "ghost": ">=6.0.0"
   },
@@ -20,6 +24,20 @@
       "l":  {"width": 1000},
       "xl": {"width": 2000}
     },
-    "card_assets": true
+    "card_assets": true,
+    "custom": {
+      "fonts": {
+        "heading_font": {
+          "type": "select",
+          "options": ["Playfair Display", "Georgia", "Times New Roman"],
+          "default": "Playfair Display"
+        },
+        "body_font": {
+          "type": "select",
+          "options": ["Inter", "System"],
+          "default": "Inter"
+        }
+      }
+    }
   }
 }
