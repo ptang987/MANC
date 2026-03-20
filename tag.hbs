@@ -1,0 +1,36 @@
+{{!< default}}
+
+{{#block "content"}}
+<div class="archive">
+    <header class="archive__header">
+        <div class="archive__header-inner">
+            {{#tag}}
+            {{#if feature_image}}
+            <div class="archive__cover">
+                <img src="{{img_url feature_image size="l"}}" alt="{{name}}">
+            </div>
+            {{/if}}
+            <div class="archive__meta">
+                <span class="archive__type">Topic</span>
+                <h1 class="archive__title">{{name}}</h1>
+                {{#if description}}
+                <p class="archive__description">{{description}}</p>
+                {{/if}}
+                <p class="archive__count">{{plural ../pagination.total empty="No posts" singular="% post" plural="% posts"}}</p>
+            </div>
+            {{/tag}}
+        </div>
+    </header>
+
+    <section class="post-feed">
+        <div class="post-feed__inner">
+            <div class="post-feed__grid">
+                {{#foreach posts}}
+                    {{> post-card}}
+                {{/foreach}}
+            </div>
+            {{pagination}}
+        </div>
+    </section>
+</div>
+{{/block}}

@@ -1,0 +1,160 @@
+{{!< default}}
+
+{{#block "content"}}
+
+<!-- HERO: Featured Artist -->
+{{#foreach posts limit="1"}}
+<section class="hero">
+    <div class="hero__inner">
+        {{#if feature_image}}
+        <a class="hero__image-link" href="{{url}}">
+            <div class="hero__image-wrapper">
+                <img class="hero__image"
+                    srcset="{{img_url feature_image size="m"}} 600w, {{img_url feature_image size="l"}} 1000w, {{img_url feature_image size="xl"}} 2000w"
+                    sizes="(max-width: 768px) 100vw, 55vw"
+                    src="{{img_url feature_image size="l"}}"
+                    alt="{{title}}">
+            </div>
+        </a>
+        {{/if}}
+        <div class="hero__content">
+            <span class="hero__kicker">Featured</span>
+            {{#if primary_tag}}
+            <div class="hero__tag"><a href="{{primary_tag.url}}">{{primary_tag.name}}</a></div>
+            {{/if}}
+            <h1 class="hero__title"><a href="{{url}}">{{title}}</a></h1>
+            {{#if custom_excerpt}}
+            <p class="hero__excerpt">{{custom_excerpt}}</p>
+            {{/if}}
+            <div class="hero__meta">
+                {{#foreach authors}}<span>{{name}}</span>{{#unless @last}}, {{/unless}}{{/foreach}}
+                <span class="hero__sep">&mdash;</span>
+                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMM YYYY"}}</time>
+            </div>
+            <a href="{{url}}" class="hero__cta">Read More</a>
+        </div>
+    </div>
+</section>
+{{/foreach}}
+
+<!-- EXHIBITIONS SECTION -->
+<section class="exhibitions-section">
+    <div class="section-inner">
+        <div class="section-header">
+            <h2 class="section-title">Exhibitions</h2>
+            <a href="/tag/exhibitions" class="section-link">View All</a>
+        </div>
+        <div class="exhibitions-grid">
+            {{#foreach posts filter="tag:exhibitions" limit="3"}}
+            <article class="exhibition-card">
+                {{#if feature_image}}
+                <a href="{{url}}" class="exhibition-card__image-link">
+                    <img src="{{img_url feature_image size="m"}}" alt="{{title}}" class="exhibition-card__image">
+                </a>
+                {{/if}}
+                <div class="exhibition-card__body">
+                    <span class="exhibition-card__date">{{date format="D MMM — "}}
+                        {{#if custom_excerpt}}{{custom_excerpt}}{{/if}}
+                    </span>
+                    <h3 class="exhibition-card__title"><a href="{{url}}">{{title}}</a></h3>
+                    {{#foreach tags limit="1"}}<span class="exhibition-card__venue">{{name}}</span>{{/foreach}}
+                </div>
+            </article>
+            {{else}}
+            <article class="exhibition-card">
+                <div class="exhibition-card__body">
+                    <span class="exhibition-card__date">15 Jan — 21 Mar 2026</span>
+                    <h3 class="exhibition-card__title">Josef Albers: Duets</h3>
+                    <span class="exhibition-card__venue">David Zwirner, Paris</span>
+                </div>
+            </article>
+            <article class="exhibition-card">
+                <div class="exhibition-card__body">
+                    <span class="exhibition-card__date">13 Jan — 21 Mar 2026</span>
+                    <h3 class="exhibition-card__title">Where the Sea Ends</h3>
+                    <span class="exhibition-card__venue">Perrotin, London</span>
+                </div>
+            </article>
+            <article class="exhibition-card">
+                <div class="exhibition-card__body">
+                    <span class="exhibition-card__date">15 Jan — 4 Apr 2026</span>
+                    <h3 class="exhibition-card__title">Jean Degottex &amp; Sidival Fila</h3>
+                    <span class="exhibition-card__venue">Mennour, Paris</span>
+                </div>
+            </article>
+            {{/foreach}}
+        </div>
+    </div>
+</section>
+
+<!-- UP & COMING ARTISTS -->
+<section class="artists-section">
+    <div class="section-inner">
+        <div class="section-header">
+            <h2 class="section-title">Up &amp; Coming Artists</h2>
+            <a href="/tag/artists" class="section-link">View All</a>
+        </div>
+        <div class="artists-grid">
+            {{#foreach posts filter="tag:artists" limit="4"}}
+            <article class="artist-card">
+                {{#if feature_image}}
+                <a href="{{url}}" class="artist-card__image-link">
+                    <img src="{{img_url feature_image size="m"}}" alt="{{title}}" class="artist-card__image">
+                </a>
+                {{/if}}
+                <div class="artist-card__body">
+                    <h3 class="artist-card__name"><a href="{{url}}">{{title}}</a></h3>
+                    {{#if custom_excerpt}}<p class="artist-card__bio">{{custom_excerpt}}</p>{{/if}}
+                </div>
+            </article>
+            {{else}}
+            <article class="artist-card artist-card--placeholder">
+                <div class="artist-card__image-placeholder"></div>
+                <div class="artist-card__body">
+                    <h3 class="artist-card__name">Emerging Artist</h3>
+                    <p class="artist-card__bio">Contemporary works exploring form and space.</p>
+                </div>
+            </article>
+            <article class="artist-card artist-card--placeholder">
+                <div class="artist-card__image-placeholder"></div>
+                <div class="artist-card__body">
+                    <h3 class="artist-card__name">Emerging Artist</h3>
+                    <p class="artist-card__bio">Mixed media investigations of memory and place.</p>
+                </div>
+            </article>
+            <article class="artist-card artist-card--placeholder">
+                <div class="artist-card__image-placeholder"></div>
+                <div class="artist-card__body">
+                    <h3 class="artist-card__name">Emerging Artist</h3>
+                    <p class="artist-card__bio">Abstract explorations of light and materiality.</p>
+                </div>
+            </article>
+            <article class="artist-card artist-card--placeholder">
+                <div class="artist-card__image-placeholder"></div>
+                <div class="artist-card__body">
+                    <h3 class="artist-card__name">Emerging Artist</h3>
+                    <p class="artist-card__bio">Sculpture at the intersection of nature and technology.</p>
+                </div>
+            </article>
+            {{/foreach}}
+        </div>
+    </div>
+</section>
+
+<!-- ART NEWS -->
+<section class="news-section">
+    <div class="section-inner">
+        <div class="section-header">
+            <h2 class="section-title">Art News</h2>
+            <a href="/tag/news" class="section-link">View All</a>
+        </div>
+        <div class="news-grid">
+            {{#foreach posts from="2" limit="6"}}
+                {{> post-card}}
+            {{/foreach}}
+        </div>
+        {{pagination}}
+    </div>
+</section>
+
+{{/block}}

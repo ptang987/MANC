@@ -1,0 +1,133 @@
+{{!< default}}
+
+{{#block "og"}}
+<meta property="og:site_name" content="{{@site.title}}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{meta_title}}">
+<meta property="og:description" content="{{meta_description}}">
+<meta property="og:url" content="{{url absolute="true"}}">
+{{#if feature_image}}
+<meta property="og:image" content="{{img_url feature_image size="xl"}}">
+{{/if}}
+<meta property="article:published_time" content="{{date format="YYYY-MM-DD"}}">
+{{#foreach tags}}<meta property="article:tag" content="{{name}}">{{/foreach}}
+{{/block}}
+
+{{#block "content"}}
+<article class="post-full {{post_class}}">
+
+    <header class="post-full__header">
+        <div class="post-full__header-inner">
+            {{#if primary_tag}}
+            <div class="post-full__tag">
+                <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+            </div>
+            {{/if}}
+            <h1 class="post-full__title">{{title}}</h1>
+            {{#if custom_excerpt}}
+            <p class="post-full__excerpt">{{custom_excerpt}}</p>
+            {{/if}}
+            <div class="post-full__meta">
+                {{#foreach authors}}
+                <div class="post-full__author">
+                    {{#if profile_image}}
+                    <a href="{{url}}">
+                        <img class="post-full__author-image" src="{{img_url profile_image size="xs"}}" alt="{{name}}" width="32" height="32">
+                    </a>
+                    {{/if}}
+                    <div class="post-full__author-info">
+                        <a class="post-full__author-name" href="{{url}}">{{name}}</a>
+                    </div>
+                </div>
+                {{/foreach}}
+                <div class="post-full__date-wrap">
+                    <time class="post-full__date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMMM YYYY"}}</time>
+                    <span class="post-full__read-time">{{reading_time}}</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {{#if feature_image}}
+    <figure class="post-full__hero">
+        <img
+            srcset="{{img_url feature_image size="s"}} 300w,
+                    {{img_url feature_image size="m"}} 600w,
+                    {{img_url feature_image size="l"}} 1000w,
+                    {{img_url feature_image size="xl"}} 2000w"
+            sizes="100vw"
+            src="{{img_url feature_image size="xl"}}"
+            alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+        >
+        {{#if feature_image_caption}}
+        <figcaption>{{feature_image_caption}}</figcaption>
+        {{/if}}
+    </figure>
+    {{/if}}
+
+    <div class="post-full__content gh-content">
+        {{content}}
+    </div>
+
+    <footer class="post-full__footer">
+        {{#if tags}}
+        <div class="post-full__tags">
+            {{#foreach tags}}
+            <a class="post-full__tag-link" href="{{url}}">{{name}}</a>
+            {{/foreach}}
+        </div>
+        {{/if}}
+
+        <section class="post-full__authors">
+            {{#foreach authors}}
+            <div class="author-card">
+                {{#if profile_image}}
+                <a href="{{url}}" class="author-card__image-link">
+                    <img class="author-card__image" src="{{img_url profile_image size="s"}}" alt="{{name}}" width="80" height="80">
+                </a>
+                {{/if}}
+                <div class="author-card__content">
+                    <h4 class="author-card__name"><a href="{{url}}">{{name}}</a></h4>
+                    {{#if bio}}<p class="author-card__bio">{{bio}}</p>{{/if}}
+                </div>
+            </div>
+            {{/foreach}}
+        </section>
+    </footer>
+
+</article>
+
+{{#if @site.members_enabled}}
+{{#unless @member}}
+<section class="subscribe-cta">
+    <div class="subscribe-cta__inner">
+        <h3 class="subscribe-cta__title">Continue reading</h3>
+        <p class="subscribe-cta__text">Subscribe to MANC for full access to all articles and the archive.</p>
+        <a href="#/portal/signup" class="btn btn--accent">Subscribe now</a>
+    </div>
+</section>
+{{/unless}}
+{{/if}}
+
+{{#if prev_post}}
+{{#if next_post}}
+<nav class="post-nav">
+    <div class="post-nav__inner">
+        {{#prev_post}}
+        <a class="post-nav__item post-nav__item--prev" href="{{url}}">
+            <span class="post-nav__label">Previous</span>
+            <span class="post-nav__title">{{title}}</span>
+        </a>
+        {{/prev_post}}
+        {{#next_post}}
+        <a class="post-nav__item post-nav__item--next" href="{{url}}">
+            <span class="post-nav__label">Next</span>
+            <span class="post-nav__title">{{title}}</span>
+        </a>
+        {{/next_post}}
+    </div>
+</nav>
+{{/if}}
+{{/if}}
+
+{{/block}}

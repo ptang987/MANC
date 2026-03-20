@@ -1,0 +1,25 @@
+<footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+        <div class="site-footer__left">
+            <a class="site-footer__logo" href="{{@site.url}}">MANC</a>
+            {{#if @site.description}}
+            <p class="site-footer__description">{{@site.description}}</p>
+            {{/if}}
+        </div>
+
+        <nav class="site-footer__nav" aria-label="Footer navigation">
+            {{#if @site.navigation}}
+            <ul class="site-footer__nav-list">
+                {{#foreach @site.navigation}}
+                <li><a class="site-footer__nav-link" href="{{url}}">{{label}}</a></li>
+                {{/foreach}}
+            </ul>
+            {{/if}}
+        </nav>
+
+        <div class="site-footer__right">
+            <p class="site-footer__copy">&copy; {{date format="YYYY"}} {{@site.title}}</p>
+            <p class="site-footer__powered">Published with <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a></p>
+        </div>
+    </div>
+</footer>
